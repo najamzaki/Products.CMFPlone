@@ -5,6 +5,16 @@
 Changelog
 =========
 
+5.1.x (unreleased)
+------------------
+
+Bug fixes:
+
+- Review list portlet showed nothing to review with plone.app.multilingual,
+  As WorkflowTool bypassed languages only for p.a.m<2.x or linguaplone.
+  fixed and now compatible to both lang-bypassing methods.
+  [iham]
+
 5.1.4 (2018-10-11)
 ------------------
 
