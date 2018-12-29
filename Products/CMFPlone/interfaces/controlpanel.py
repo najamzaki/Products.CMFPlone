@@ -8,7 +8,7 @@ from zope.interface import Interface
 from zope.interface import Invalid
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-
+import re
 import json
 
 
@@ -1416,6 +1416,12 @@ class ITypesSchema(Interface):
         value_type=schema.TextLine()
     )
 
+def validate_email(email):
+	"""Check The Email from address is valid."""
+	if re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)",email) != None:
+		return True
+	else:
+		raise Invalid(_(u'Email Not Valid')) 
 
 class IMailSchema(Interface):
 
@@ -1486,7 +1492,8 @@ class IMailSchema(Interface):
             u'contact form and the \'Send test '
             u'e-mail\' feature.'),
         default=None,
-        required=True)
+        required=True,
+        constraint=validate_email)
 
     email_charset = schema.ASCIILine(
         title=_(u'E-mail characterset'),
